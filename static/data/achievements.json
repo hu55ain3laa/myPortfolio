@@ -1,0 +1,36 @@
+{
+    "achievements": [
+        {
+            "icon": "fa-check-circle",
+            "iconColor": "text-green-500",
+            "text": "The 1st place in University of Technology Computer Science"
+        },
+        {
+            "icon": "fa-check-circle",
+            "iconColor": "text-green-500",
+            "text": "Achieved 90% student satisfaction rate in Python courses"
+        }
+    ],
+    "certifications": [
+        {
+            "icon": "fa-award",
+            "iconColor": "text-yellow-500",
+            "text": "Anaconda Python Instructor Certification"
+        },
+        {
+            "icon": "fa-award",
+            "iconColor": "text-yellow-500",
+            "text": "CS50P Certificate"
+        },
+        {
+            "icon": "fa-award",
+            "iconColor": "text-yellow-500",
+            "text": "FastAPI Certified Developer"
+        },
+        {
+            "icon": "fa-award",
+            "iconColor": "text-yellow-500",
+            "text": "Multiple Certificates in Programming Languages"
+        }
+    ]
+} 

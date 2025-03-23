@@ -1,0 +1,184 @@
+{
+    "frontend": {
+        "name": "Frontend Development",
+        "icon": "fa-code",
+        "color": "blue",
+        "skills": [
+            {
+                "name": "Vue",
+                "icon": "static/icons/vue.svg",
+                "color": "blue-400"
+            },
+            {
+                "name": "Reflex",
+                "icon": "static/icons/reflex.svg",
+                "color": "blue-400"
+            },
+            {
+                "name": "Plasmic",
+                "icon": "static/icons/plasmic.svg",
+                "color": "blue-400"
+            },
+            {
+                "name": "TypeScript",
+                "icon": "static/icons/typescript.svg",
+                "color": "blue-600"
+            },
+            {
+                "name": "JavaScript",
+                "icon": "static/icons/javascript.svg",
+                "color": "blue-600"
+            },
+            {
+                "name": "TailwindCSS",
+                "icon": "static/icons/tailwindcss.svg",
+                "color": "cyan-500"
+            }
+        ]
+    },
+    "backend": {
+        "name": "Backend Development",
+        "icon": "fa-server",
+        "color": "green",
+        "skills": [
+            {
+                "name": "Python",
+                "icon": "static/icons/python.svg",
+                "color": "blue-600"
+            },
+            {
+                "name": "FastAPI",
+                "icon": "static/icons/fastapi.svg",
+                "color": "green-500"
+            },
+            {
+                "name": "Robyn",
+                "icon": "static/icons/robyn.svg",
+                "color": "green-600"
+            },
+            {
+                "name": "Golang",
+                "icon": "static/icons/golang.svg",
+                "color": "green-500"
+            }
+        ]
+    },
+    "database": {
+        "name": "Database & Caching",
+        "icon": "fa-database",
+        "color": "purple",
+        "skills": [
+            {
+                "name": "PostgreSQL",
+                "icon": "static/icons/postgresql.svg",
+                "color": "purple-500"
+            },
+            {
+                "name": "SQLModel",
+                "icon": "static/icons/sqlmodel.svg",
+                "color": "purple-500"
+            },
+            {
+                "name": "Supabase",
+                "icon": "static/icons/supabase.svg",
+                "color": "green-500"
+            },
+            {
+                "name": "Firebase",
+                "icon": "static/icons/firebase.svg",
+                "color": "green-500"
+            },
+            {
+                "name": "Neon",
+                "icon": "static/icons/neon.svg",
+                "color": "green-500"
+            },
+            {
+                "name": "MongoDB",
+                "icon": "static/icons/mongodb.svg",
+                "color": "green-500"
+            },
+            {
+                "name": "Redis",
+                "icon": "static/icons/redis.svg",
+                "color": "red-500"
+            }
+        ]
+    },
+    "devops": {
+        "name": "DevOps & Cloud",
+        "icon": "fa-cloud",
+        "color": "indigo",
+        "skills": [
+            {
+                "name": "Docker",
+                "icon": "static/icons/docker.svg",
+                "color": "blue-500"
+            },
+            {
+                "name": "Kubernetes",
+                "icon": "static/icons/kubernetes.svg",
+                "color": "blue-600"
+            },
+            {
+                "name": "AWS",
+                "icon": "static/icons/aws.svg",
+                "color": "orange-500"
+            }
+        ]
+    },
+    "ml": {
+        "name": "Machine Learning",
+        "icon": "fa-brain",
+        "color": "pink",
+        "skills": [
+            {
+                "name": "TensorFlow",
+                "icon": "static/icons/tensorflow.svg",
+                "color": "orange-500"
+            },
+            {
+                "name": "PyTorch",
+                "icon": "static/icons/pytorch.svg",
+                "color": "red-500"
+            },
+            {
+                "name": "Scikit-learn",
+                "icon": "static/icons/scikit-learn.svg",
+                "color": "orange-600"
+            }
+        ]
+    },
+    "design": {
+        "name": "UI/UX & Graphic Design",
+        "icon": "fa-paint-brush",
+        "color": "pink",
+        "skills": [
+            {
+                "name": "Figma",
+                "icon": "static/icons/figma.svg",
+                "color": "pink-500"
+            },
+            {
+                "name": "Adobe XD",
+                "icon": "static/icons/xd.svg",
+                "color": "pink-600"
+            },
+            {
+                "name": "Adobe Photoshop",
+                "icon": "static/icons/photoshop.svg",
+                "color": "blue-500"
+            },
+            {
+                "name": "Adobe Illustrator",
+                "icon": "static/icons/illustrator.svg",
+                "color": "orange-500"
+            },
+            {
+                "name": "Adobe InDesign",
+                "icon": "static/icons/indesign.svg",
+                "color": "pink-500"
+            }
+        ]
+    }
+} 

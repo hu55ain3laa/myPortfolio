@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            bg: '#1a1a1a',
+                            card: '#2d2d2d',
+                            text: '#e5e5e5',
+                            border: '#404040'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Add Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Add Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .section {
+            min-height: 100vh;
+            padding: 6rem 2rem;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #3B82F6, #10B981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(45deg, #3B82F6, #10B981);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .skill-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .social-link {
+            transition: transform 0.3s ease;
+        }
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+        @media (max-width: 768px) {
+            .section {
+                padding: 4rem 1rem;
+            }
+        }
+        .theme-toggle {
+            transition: transform 0.3s ease;
+        }
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        .animate-scroll {
+            animation: scroll 30s linear infinite;
+        }
+        .skills-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .skills-scroll {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        .skills-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+        }
+        .skills-track.scroll-right {
+            animation: scrollRight 30s linear infinite;
+        }
+        .skills-track.scroll-left {
+            animation: scrollLeft 30s linear infinite;
+        }
+        .skills-track:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scrollRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-50% - 0.75rem));
+            }
+        }
+        @keyframes scrollLeft {
+            0% {
+                transform: translateX(calc(-50% - 0.75rem));
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        .skill-card {
+            flex: 0 0 auto;
+            width: 200px;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .dark .skill-card {
+            background: #2d2d2d;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .skills-container::before,
+        .skills-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .skills-container::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+        }
+        .skills-container::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+        }
+        .dark .skills-container::before {
+            background: linear-gradient(to right, rgba(26,26,26,1), rgba(26,26,26,0));
+        }
+        .dark .skills-container::after {
+            background: linear-gradient(to left, rgba(26,26,26,1), rgba(26,26,26,0));
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-dark-text transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/80 dark:bg-dark-card/80 backdrop-blur-sm z-50 shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold gradient-text">{{ name }}</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="theme-toggle p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+                        <i class="fas fa-moon text-gray-300 hidden dark:block"></i>
+                    </button>
+                    <button class="md:hidden text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 opacity-50"></div>
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="text-center md:text-left flex-1" data-aos="fade-right">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-3 gradient-text">{{ name }}</h1>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full text-sm">{{ role }}</span>
+                        <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-sm">Python Instructor</span>
+                        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full text-sm">AI/ML Developer</span>
+                    </div>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">Full Stack Developer specializing in FastAPI, Python, and Machine Learning</p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">
+                            Get in Touch
+                        </a>
+                        <a href="https://github.com/hu55ain3laa" class="border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-6 py-2 rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 transition duration-300">
+                            View Projects
+                        </a>
+                    </div>
+                </div>
+                <div class="flex-1 flex justify-center" data-aos="fade-left">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-green-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                        <div class="relative bg-white dark:bg-dark-card rounded-full p-3 shadow-xl">
+                            <img src="/static/images/image.jpg" alt="{{ name }}" class="w-72 h-72 object-contain rounded-full transform hover:scale-105 transition-transform duration-300">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    {% if config.show_about %}
+    <section id="about" class="section bg-white dark:bg-dark-card">
+        <div class="container mx-auto" data-aos="fade-up">
+            <h2 class="text-4xl font-bold mb-6 text-center gradient-text">About Me</h2>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg text-gray-600 dark:text-gray-300 text-center leading-relaxed mb-8">
+                    {{ about }}
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                    <div class="text-center p-4 bg-gray-50 dark:bg-dark-bg rounded-lg">
+                        <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">5+</div>
+                        <div class="text-gray-600 dark:text-gray-300">Years Experience</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 dark:bg-dark-bg rounded-lg">
+                        <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">20+</div>
+                        <div class="text-gray-600 dark:text-gray-300">Projects Completed</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 dark:bg-dark-bg rounded-lg">
+                        <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">100+</div>
+                        <div class="text-gray-600 dark:text-gray-300">Students Taught</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 dark:bg-dark-bg rounded-lg">
+                        <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">10+</div>
+                        <div class="text-gray-600 dark:text-gray-300">ML Models Built</div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    {% if config.show_achievements %}
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-500/10 dark:bg-blue-500/5 flex items-center justify-center">
+                                <i class="fas fa-trophy text-blue-500 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Achievements</h3>
+                        </div>
+                        <ul class="space-y-3">
+                            {% for achievement in achievements %}
+                            <li class="flex items-start gap-3">
+                                <i class="fas {{ achievement.icon }} {{ achievement.iconColor }} mt-1"></i>
+                                <span class="text-gray-600 dark:text-gray-300">{{ achievement.text }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    {% if config.show_certifications %}
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-purple-500/10 dark:bg-purple-500/5 flex items-center justify-center">
+                                <i class="fas fa-certificate text-purple-500 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-white">Certifications</h3>
+                        </div>
+                        <ul class="space-y-3">
+                            {% for certification in certifications %}
+                            <li class="flex items-start gap-3">
+                                <i class="fas {{ certification.icon }} {{ certification.iconColor }} mt-1"></i>
+                                <span class="text-gray-600 dark:text-gray-300">{{ certification.text }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Skills Section -->
+    {% if config.show_skills %}
+    <section id="skills" class="section">
+        <div class="container mx-auto" data-aos="fade-up">
+            <h2 class="text-4xl font-bold mb-8 text-center gradient-text">Skills</h2>
+            <div class="relative overflow-hidden space-y-8">
+                {% for category, data in skills.items() %}
+                <div class="mb-12">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-{{ data.color }}-500/10 dark:bg-{{ data.color }}-500/5 flex items-center justify-center">
+                            <i class="fa-solid {{ data.icon }} text-{{ data.color }}-500 text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">{{ data.name }}</h2>
+                    </div>
+                    <div class="skills-container">
+                        <div class="skills-scroll">
+                            <div class="skills-track {% if loop.index is even %}scroll-left{% else %}scroll-right{% endif %}">
+                                {% for skill in data.skills %}
+                                <div class="skill-card relative bg-white dark:bg-dark-card p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-{{ skill.color }}/10 to-{{ data.color }}-500/10 dark:from-{{ skill.color }}/5 dark:to-{{ data.color }}-500/5 rounded-xl"></div>
+                                    <div class="relative w-16 h-16 flex items-center justify-center mb-4">
+                                        <object data="{{ skill.icon }}" type="image/svg+xml" class="w-12 h-12 text-{{ skill.color }}">
+                                            <img src="/static/icons/x.svg" alt="{{ skill.name }}" class="w-12 h-12 text-{{ skill.color }}">
+                                        </object>
+                                    </div>
+                                    <h3 class="relative text-lg font-semibold text-gray-800 dark:text-white">{{ skill.name }}</h3>
+                                </div>
+                                {% endfor %}
+                                {% for skill in data.skills %}
+                                <div class="skill-card relative bg-white dark:bg-dark-card p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-{{ skill.color }}/10 to-{{ data.color }}-500/10 dark:from-{{ skill.color }}/5 dark:to-{{ data.color }}-500/5 rounded-xl"></div>
+                                    <div class="relative w-16 h-16 flex items-center justify-center mb-4">
+                                        <object data="{{ skill.icon }}" type="image/svg+xml" class="w-12 h-12 text-{{ skill.color }}">
+                                            <img src="/static/icons/x.svg" alt="{{ skill.name }}" class="w-12 h-12 text-{{ skill.color }}">
+                                        </object>
+                                    </div>
+                                    <h3 class="relative text-lg font-semibold text-gray-800 dark:text-white">{{ skill.name }}</h3>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Projects Section -->
+    {% if config.show_projects %}
+    <section id="projects" class="section bg-white dark:bg-dark-card">
+        <div class="container mx-auto" data-aos="fade-up">
+            <h2 class="text-4xl font-bold mb-8 text-center gradient-text">Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for project in projects %}
+                <div class="project-card bg-gray-50 dark:bg-dark-bg p-5 rounded-lg shadow-md hover:shadow-lg">
+                    <h3 class="text-xl font-bold mb-3">{{ project.title }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">{{ project.description }}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {% for tech in project.technologies %}
+                        <span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-2 py-1 rounded-full text-xs">
+                            {{ tech }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="{{ project.github_url }}" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="{{ project.live_url }}" target="_blank" class="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Contact Section -->
+    {% if config.show_contact %}
+    <section id="contact" class="section bg-white dark:bg-dark-card">
+        <div class="container mx-auto" data-aos="fade-up">
+            <h2 class="text-4xl font-bold mb-8 text-center gradient-text">Get in Touch</h2>
+            <div class="max-w-2xl mx-auto">
+                <div class="flex flex-col items-center space-y-8">
+                    <div class="grid grid-cols-3 gap-8">
+                        <a href="https://t.me/hu55ain3laa" target="_blank" class="social-link group flex flex-col items-center">
+                            <div class="bg-blue-500 dark:bg-blue-600 p-4 rounded-full transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg w-16 h-16 flex items-center justify-center">
+                                <i class="fab fa-telegram text-3xl text-white"></i>
+                            </div>
+                            <span class="mt-3 text-sm font-medium text-gray-600 dark:text-gray-300">Telegram</span>
+                        </a>
+                        <a href="https://github.com/hu55ain3laa" target="_blank" class="social-link group flex flex-col items-center">
+                            <div class="bg-gray-800 dark:bg-gray-700 p-4 rounded-full transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg w-16 h-16 flex items-center justify-center">
+                                <i class="fab fa-github text-3xl text-white"></i>
+                            </div>
+                            <span class="mt-3 text-sm font-medium text-gray-600 dark:text-gray-300">GitHub</span>
+                        </a>
+                        <a href="https://instagram.com/hu55ain3laa" target="_blank" class="social-link group flex flex-col items-center">
+                            <div class="bg-pink-500 dark:bg-pink-600 p-4 rounded-full transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg w-16 h-16 flex items-center justify-center">
+                                <i class="fab fa-instagram text-3xl text-white"></i>
+                            </div>
+                            <span class="mt-3 text-sm font-medium text-gray-600 dark:text-gray-300">Instagram</span>
+                        </a>
+                    </div>
+                    <div class="text-center space-y-4">
+                        <p class="text-gray-600 dark:text-gray-300 text-sm font-medium">@hu55ain3laa</p>
+                        <a href="mailto:{{ contact.email }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center justify-center gap-2">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ contact.email }}</span>
+                        </a>
+                    </div>
+                    <div class="w-full max-w-md">
+                        <form class="space-y-6 bg-white dark:bg-dark-card p-8 rounded-xl shadow-lg">
+                            <div class="space-y-2">
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                                <input type="text" id="name" name="name" 
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                                    placeholder="Your name">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                                <input type="email" id="email" name="email" 
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                                    placeholder="your@email.com">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                                <textarea id="message" name="message" rows="4" 
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out resize-none"
+                                    placeholder="Your message..."></textarea>
+                            </div>
+                            <button type="submit" 
+                                class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-dark-bg transition duration-200 ease-in-out flex items-center justify-center gap-2">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Mobile menu functionality
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        const mobileMenu = document.querySelector('.hidden.md\\:flex');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            mobileMenu.classList.toggle('flex-col');
+            mobileMenu.classList.toggle('absolute');
+            mobileMenu.classList.toggle('top-16');
+            mobileMenu.classList.toggle('left-0');
+            mobileMenu.classList.toggle('right-0');
+            mobileMenu.classList.toggle('bg-white');
+            mobileMenu.classList.toggle('dark:bg-dark-card');
+            mobileMenu.classList.toggle('p-4');
+        });
+
+        // Initialize Swiper for each skills category
+        document.addEventListener('DOMContentLoaded', function() {
+            const swipers = document.querySelectorAll('.swiper');
+            swipers.forEach((swiper, index) => {
+                new Swiper(swiper, {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    loop: true,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 2,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                        },
+                    },
+                });
+            });
+        });
+
+        // Initialize infinite scroll with alternating directions
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillsTracks = document.querySelectorAll('.skills-track');
+            
+            skillsTracks.forEach((track, index) => {
+                // Clone the first set of skills
+                const skills = Array.from(track.children);
+                skills.forEach(skill => {
+                    const clone = skill.cloneNode(true);
+                    track.appendChild(clone);
+                });
+
+                // Reset animation when it ends
+                track.addEventListener('animationend', () => {
+                    track.style.animation = 'none';
+                    track.offsetHeight; // Trigger reflow
+                    track.style.animation = index % 2 === 0 ? 'scrollLeft 30s linear infinite' : 'scrollRight 30s linear infinite';
+                });
+            });
+        });
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Disable submit button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="flex items-center justify-center gap-2"><i class="fas fa-spinner fa-spin"></i> Sending...</span>';
+            
+            try {
+                const response = await fetch('/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: form.name.value,
+                        email: form.email.value,
+                        message: form.message.value
+                    })
+                });
+                
+                const data = await response.json();
+                
+                // Show success/error message
+                formMessage.classList.remove('hidden');
+                if (data.status === 'success') {
+                    formMessage.classList.add('bg-green-100', 'text-green-800', 'dark:bg-green-900/30', 'dark:text-green-300');
+                    formMessage.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Message sent successfully!';
+                    form.reset();
+                } else {
+                    formMessage.classList.add('bg-red-100', 'text-red-800', 'dark:bg-red-900/30', 'dark:text-red-300');
+                    formMessage.innerHTML = '<i class="fas fa-exclamation-circle mr-2"></i> Failed to send message. Please try again.';
+                }
+            } catch (error) {
+                formMessage.classList.remove('hidden');
+                formMessage.classList.add('bg-red-100', 'text-red-800', 'dark:bg-red-900/30', 'dark:text-red-300');
+                formMessage.innerHTML = '<i class="fas fa-exclamation-circle mr-2"></i> An error occurred. Please try again.';
+            } finally {
+                // Re-enable submit button and restore original text
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<span class="flex items-center justify-center gap-2"><i class="fas fa-paper-plane"></i> Send Message</span>';
+            }
+        });
+    </script>
+</body>
+</html> 
