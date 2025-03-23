@@ -17,9 +17,16 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=[
+        "http://localhost:8000",  # Local development
+        "http://localhost:3000",  # Local development with different port
+        "https://hu55ain3laa.github.io",  # GitHub Pages
+        "https://hu55ain3laa.com",  # Your domain (if you have one)
+        "https://www.hu55ain3laa.com",  # www subdomain (if you have one)
+        "https://*.onrender.com",  # Render domains
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -102,9 +109,10 @@ async def health_check():
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 8000))
+    host = os.getenv("HOST", "0.0.0.0")
     uvicorn.run(
         "main:app",
-        host="0.0.0.0",
+        host=host,
         port=port,
         reload=False  # Disable reload in production
     ) 
