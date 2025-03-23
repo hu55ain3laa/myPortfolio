@@ -1,22 +1,29 @@
-# Personal Portfolio Website
+# Hussein Ghadhban - Portfolio Website
 
-A modern, responsive portfolio website built with FastAPI and TailwindCSS.
+A modern, responsive portfolio website showcasing my work as a Full Stack Developer, built with FastAPI and TailwindCSS.
 
 ## Features
 
-- 🎨 Modern and responsive design
+- 🎨 Modern and responsive design with smooth animations
 - 🌓 Dark/Light mode support
-- 📱 Mobile-friendly layout
+- 📱 Mobile-first approach
 - ⚡ Fast and optimized performance
 - 🔒 Secure contact form
 - 🎯 SEO optimized
+- 📊 Dynamic content management through JSON files
+- 🎨 Beautiful UI with TailwindCSS
+- 🚀 FastAPI backend for optimal performance
 
 ## Tech Stack
 
-- FastAPI
-- TailwindCSS
-- Jinja2 Templates
-- Python 3.12+
+- **Backend**: FastAPI (Python 3.12+)
+- **Frontend**: 
+  - TailwindCSS for styling
+  - Jinja2 Templates
+  - Font Awesome icons
+  - AOS (Animate On Scroll)
+  - Swiper.js for carousels
+- **Deployment**: Docker & Docker Compose
 
 ## Prerequisites
 
@@ -28,8 +35,8 @@ A modern, responsive portfolio website built with FastAPI and TailwindCSS.
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/portfolio.git
-cd portfolio
+git clone https://github.com/hu55ain3laa/myPortfolio.git
+cd myPortfolio
 ```
 
 2. Create and activate a virtual environment:
@@ -68,8 +75,8 @@ docker run -d -p 8000:8000 portfolio
 
 1. Build and push the Docker image to a container registry:
 ```bash
-docker build -t your-registry/portfolio:latest .
-docker push your-registry/portfolio:latest
+docker build -t hu55ain3laa/portfolio:latest .
+docker push hu55ain3laa/portfolio:latest
 ```
 
 2. Deploy using Docker Compose:
@@ -98,19 +105,47 @@ gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
 
 ## Configuration
 
-The website can be configured through the following JSON files in the `static/data` directory:
+The website content can be easily customized through JSON files in the `static/data` directory:
 
 - `config.json`: General website configuration
 - `skills.json`: Skills and technologies
 - `achievements.json`: Achievements and certifications
 
-## Contributing
+### Example Configuration
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+```json
+{
+  "name": "Hussein Ghadhban",
+  "role": "Full Stack Developer",
+  "about": "Your about text here",
+  "contact": {
+    "email": "your.email@example.com",
+    "github": "https://github.com/yourusername",
+    "linkedin": "https://linkedin.com/in/yourusername"
+  }
+}
+```
+
+## Project Structure
+
+```
+myPortfolio/
+├── static/
+│   ├── css/
+│   ├── js/
+│   ├── images/
+│   └── data/
+│       ├── config.json
+│       ├── skills.json
+│       └── achievements.json
+├── templates/
+│   └── index.html
+├── main.py
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
+```
 
 ## License
 
@@ -118,6 +153,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
+Hussein Ghadhban - [ala.1995@yahoo.com](mailto:ala.1995@yahoo.com)
 
-Project Link: [https://github.com/yourusername/portfolio](https://github.com/yourusername/portfolio) 
+- GitHub: [hu55ain3laa](https://github.com/hu55ain3laa)
+- LinkedIn: [hu55ain3laa](https://linkedin.com/in/hu55ain3laa)
+
+Project Link: [https://github.com/hu55ain3laa/myPortfolio](https://github.com/hu55ain3laa/myPortfolio) 
