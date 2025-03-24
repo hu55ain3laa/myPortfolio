@@ -1,130 +1,31 @@
 # Hussein Ghadhban - Portfolio Website
 
-A modern, responsive portfolio website showcasing my work as a Full Stack Developer, built with FastAPI and TailwindCSS.
+A modern, responsive portfolio website showcasing my work as a Full Stack Developer, built with FastAPI and TailwindCSS. This portfolio highlights my skills, projects, and achievements with a beautiful and interactive design.
 
 ## Features
 
-- 🎨 Modern and responsive design with smooth animations
 - 🌓 Dark/Light mode support
-- 📱 Mobile-first approach
-- ⚡ Fast and optimized performance
-- 🔒 Secure contact form
+- 📱 Fully responsive design
+- 🎨 Modern UI with smooth animations
+- 🚀 Fast performance with FastAPI
+- 📝 Dynamic content management through JSON files
+- 🔄 Infinite scroll animations for skills
+- 📬 Contact form with email integration
+- 🌐 Social media integration
 - 🎯 SEO optimized
-- 📊 Dynamic content management through JSON files
-- 🎨 Beautiful UI with TailwindCSS
-- 🚀 FastAPI backend for optimal performance
 
 ## Tech Stack
 
-- **Backend**: FastAPI (Python 3.12+)
+- **Backend**: FastAPI
 - **Frontend**: 
-  - TailwindCSS for styling
-  - Jinja2 Templates
-  - Font Awesome icons
+  - HTML5
+  - TailwindCSS
+  - JavaScript (Vanilla)
+- **Libraries**:
   - AOS (Animate On Scroll)
-  - Swiper.js for carousels
-- **Deployment**: Docker & Docker Compose
-
-## Prerequisites
-
-- Python 3.12 or higher
-- pip (Python package manager)
-- Docker (optional, for containerized deployment)
-
-## Local Development
-
-1. Clone the repository:
-```bash
-git clone https://github.com/hu55ain3laa/myPortfolio.git
-cd myPortfolio
-```
-
-2. Create and activate a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Run the development server:
-```bash
-uvicorn main:app --reload
-```
-
-5. Open your browser and navigate to `http://localhost:8000`
-
-## Docker Deployment
-
-1. Build the Docker image:
-```bash
-docker build -t portfolio .
-```
-
-2. Run the container:
-```bash
-docker run -d -p 8000:8000 portfolio
-```
-
-## Production Deployment
-
-### Option 1: Using Docker (Recommended)
-
-1. Build and push the Docker image to a container registry:
-```bash
-docker build -t hu55ain3laa/portfolio:latest .
-docker push hu55ain3laa/portfolio:latest
-```
-
-2. Deploy using Docker Compose:
-```bash
-docker-compose up -d
-```
-
-### Option 2: Direct Server Deployment
-
-1. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-2. Set up environment variables:
-```bash
-export PORT=8000
-```
-
-3. Run with a production server (e.g., Gunicorn):
-```bash
-gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
-```
-
-4. Set up a reverse proxy (e.g., Nginx) in front of the application.
-
-## Configuration
-
-The website content can be easily customized through JSON files in the `static/data` directory:
-
-- `config.json`: General website configuration
-- `skills.json`: Skills and technologies
-- `achievements.json`: Achievements and certifications
-
-### Example Configuration
-
-```json
-{
-  "name": "Hussein Ghadhban",
-  "role": "Full Stack Developer",
-  "about": "Your about text here",
-  "contact": {
-    "email": "your.email@example.com",
-    "github": "https://github.com/yourusername",
-    "linkedin": "https://linkedin.com/in/yourusername"
-  }
-}
-```
+  - Swiper.js
+  - Font Awesome
+- **Deployment**: Render
 
 ## Project Structure
 
@@ -132,30 +33,79 @@ The website content can be easily customized through JSON files in the `static/d
 myPortfolio/
 ├── static/
 │   ├── css/
+│   │   └── style.css
 │   ├── js/
+│   │   └── main.js
 │   ├── images/
+│   ├── icons/
 │   └── data/
-│       ├── config.json
 │       ├── skills.json
-│       └── achievements.json
+│       ├── achievements.json
+│       └── config.json
 ├── templates/
 │   └── index.html
 ├── main.py
-├── requirements.txt
-├── Dockerfile
-├── docker-compose.yml
 └── README.md
 ```
 
-## License
+## Getting Started
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+1. Clone the repository:
+```bash
+git clone https://github.com/hu55ain3laa/myPortfolio.git
+cd myPortfolio
+```
+
+2. Install dependencies:
+```bash
+pip install fastapi uvicorn jinja2 python-multipart
+```
+
+3. Run the development server:
+```bash
+uvicorn main:app --reload
+```
+
+4. Open your browser and navigate to `http://localhost:8000`
+
+## Customization
+
+### Content Management
+
+All content is managed through JSON files in the `static/data` directory:
+
+- `skills.json`: Define your skills and categories
+- `achievements.json`: List your achievements and certifications
+- `config.json`: Configure which sections to display
+
+### Styling
+
+- Main styles are in `static/css/style.css`
+- TailwindCSS classes are used for utility styling
+- Custom animations and transitions are defined in the CSS file
+
+### Images and Icons
+
+- Add your profile image to `static/images/`
+- Add skill icons to `static/icons/`
+- Supported formats: SVG, PNG, JPG
+
+## Deployment
+
+This portfolio is deployed on Render:
+
+1. Create a new Web Service on Render
+2. Connect your GitHub repository
+3. Configure the following settings:
+   - Build Command: `pip install -r requirements.txt`
+   - Start Command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+   - Environment Variables:
+     - `PORT`: 8000
+
+The site is live at: [https://hu55ain3laa.onrender.com](https://hu55ain3laa.onrender.com)
 
 ## Contact
 
-Hussein Ghadhban - [ala.1995@yahoo.com](mailto:ala.1995@yahoo.com)
-
+- Email: ala.1995@yahoo.com
 - GitHub: [hu55ain3laa](https://github.com/hu55ain3laa)
-- LinkedIn: [hu55ain3laa](https://linkedin.com/in/hu55ain3laa)
-
-Project Link: [https://github.com/hu55ain3laa/myPortfolio](https://github.com/hu55ain3laa/myPortfolio) 
+- LinkedIn: [hu55ain3laa](https://linkedin.com/in/hu55ain3laa) 
