@@ -9,35 +9,31 @@ import os
 from typing import Dict, Any
 
 app = FastAPI(
-    title="Portfolio Website",
+    title="Hussein Ghadhban Portfolio Website",
     description="Personal portfolio website built with FastAPI",
     version="1.0.0"
 )
 
-# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:8000",  # Local development
-        "http://localhost:3000",  # Local development with different port
-        "https://hu55ain3laa.github.io",  # GitHub Pages
-        "https://hu55ain3laa.com",  # Your domain (if you have one)
-        "https://www.hu55ain3laa.com",  # www subdomain (if you have one)
-        "https://*.onrender.com",  # Render domains
+        "http://localhost:8000",
+        "http://localhost:3000",
+        "https://hu55ain3laa.github.io",
+        "https://hu55ain3laa.com",
+        "https://www.hu55ain3laa.com",
+        "https://*.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
-# Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Templates
 templates = Jinja2Templates(directory="templates")
 
 def load_json_file(file_path: str) -> Dict[str, Any]:
-    """Load and parse a JSON file with error handling."""
     try:
         with open(file_path, 'r') as f:
             return json.load(f)
@@ -48,7 +44,6 @@ def load_json_file(file_path: str) -> Dict[str, Any]:
         print(f"Error: {file_path} contains invalid JSON")
         return {}
 
-# Load data files
 skills_data = load_json_file('static/data/skills.json')
 achievements_data = load_json_file('static/data/achievements.json')
 config = load_json_file('static/data/config.json')
@@ -103,7 +98,6 @@ async def home(request: Request):
 
 @app.get("/health")
 async def health_check():
-    """Health check endpoint for monitoring."""
     return {"status": "healthy"}
 
 if __name__ == "__main__":
@@ -114,5 +108,5 @@ if __name__ == "__main__":
         "main:app",
         host=host,
         port=port,
-        reload=False  # Disable reload in production
+        reload=False
     ) 

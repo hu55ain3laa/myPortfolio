@@ -29,159 +29,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- Add Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        .section {
-            min-height: 100vh;
-            padding: 6rem 2rem;
-        }
-        .gradient-text {
-            background: linear-gradient(45deg, #3B82F6, #10B981);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .nav-link {
-            position: relative;
-            font-weight: 500;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background: linear-gradient(45deg, #3B82F6, #10B981);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .skill-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .skill-card:hover {
-            transform: translateY(-5px);
-        }
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-        .social-link {
-            transition: transform 0.3s ease;
-        }
-        .social-link:hover {
-            transform: translateY(-3px);
-        }
-        @media (max-width: 768px) {
-            .section {
-                padding: 4rem 1rem;
-            }
-        }
-        .theme-toggle {
-            transition: transform 0.3s ease;
-        }
-        .theme-toggle:hover {
-            transform: rotate(180deg);
-        }
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-        .animate-scroll {
-            animation: scroll 30s linear infinite;
-        }
-        .skills-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
-        .skills-scroll {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            padding: 20px 0;
-        }
-        .skills-track {
-            display: flex;
-            gap: 1.5rem;
-            width: max-content;
-        }
-        .skills-track.scroll-right {
-            animation: scrollRight 30s linear infinite;
-        }
-        .skills-track.scroll-left {
-            animation: scrollLeft 30s linear infinite;
-        }
-        .skills-track:hover {
-            animation-play-state: paused;
-        }
-        @keyframes scrollRight {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(calc(-50% - 0.75rem));
-            }
-        }
-        @keyframes scrollLeft {
-            0% {
-                transform: translateX(calc(-50% - 0.75rem));
-            }
-            100% {
-                transform: translateX(0);
-            }
-        }
-        .skill-card {
-            flex: 0 0 auto;
-            width: 200px;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            background: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .dark .skill-card {
-            background: #2d2d2d;
-        }
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .skills-container::before,
-        .skills-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 100px;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .skills-container::before {
-            left: 0;
-            background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
-        }
-        .skills-container::after {
-            right: 0;
-            background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
-        }
-        .dark .skills-container::before {
-            background: linear-gradient(to right, rgba(26,26,26,1), rgba(26,26,26,0));
-        }
-        .dark .skills-container::after {
-            background: linear-gradient(to left, rgba(26,26,26,1), rgba(26,26,26,0));
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body class="bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-dark-text transition-colors duration-300">
     <!-- Navigation -->
@@ -201,9 +49,19 @@
                         <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
                         <i class="fas fa-moon text-gray-300 hidden dark:block"></i>
                     </button>
-                    <button class="md:hidden text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                    <button id="mobile-menu-button" class="md:hidden text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="nav-link text-lg">Home</a>
+                    <a href="#about" class="nav-link text-lg">About</a>
+                    <a href="#skills" class="nav-link text-lg">Skills</a>
+                    <a href="#projects" class="nav-link text-lg">Projects</a>
+                    <a href="#contact" class="nav-link text-lg">Contact</a>
                 </div>
             </div>
         </div>
@@ -232,10 +90,9 @@
                     </div>
                 </div>
                 <div class="flex-1 flex justify-center" data-aos="fade-left">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-green-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                        <div class="relative bg-white dark:bg-dark-card rounded-full p-3 shadow-xl">
-                            <img src="/static/images/image.jpg" alt="{{ name }}" class="w-72 h-72 object-contain rounded-full transform hover:scale-105 transition-transform duration-300">
+                    <div class="image-container">
+                        <div class="image-wrapper">
+                            <img src="/static/images/image.jpg" alt="{{ name }}">
                         </div>
                     </div>
                 </div>
@@ -461,149 +318,6 @@
     </section>
     {% endif %}
 
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true
-        });
-
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        
-        // Check for saved theme preference
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        } else {
-            html.classList.remove('dark');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-        });
-
-        // Mobile menu functionality
-        const mobileMenuButton = document.querySelector('.md\\:hidden');
-        const mobileMenu = document.querySelector('.hidden.md\\:flex');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
-            mobileMenu.classList.toggle('flex-col');
-            mobileMenu.classList.toggle('absolute');
-            mobileMenu.classList.toggle('top-16');
-            mobileMenu.classList.toggle('left-0');
-            mobileMenu.classList.toggle('right-0');
-            mobileMenu.classList.toggle('bg-white');
-            mobileMenu.classList.toggle('dark:bg-dark-card');
-            mobileMenu.classList.toggle('p-4');
-        });
-
-        // Initialize Swiper for each skills category
-        document.addEventListener('DOMContentLoaded', function() {
-            const swipers = document.querySelectorAll('.swiper');
-            swipers.forEach((swiper, index) => {
-                new Swiper(swiper, {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    loop: true,
-                    autoplay: {
-                        delay: 3000,
-                        disableOnInteraction: false,
-                    },
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                    breakpoints: {
-                        640: {
-                            slidesPerView: 2,
-                        },
-                        768: {
-                            slidesPerView: 3,
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                        },
-                    },
-                });
-            });
-        });
-
-        // Initialize infinite scroll with alternating directions
-        document.addEventListener('DOMContentLoaded', function() {
-            const skillsTracks = document.querySelectorAll('.skills-track');
-            
-            skillsTracks.forEach((track, index) => {
-                // Clone the first set of skills
-                const skills = Array.from(track.children);
-                skills.forEach(skill => {
-                    const clone = skill.cloneNode(true);
-                    track.appendChild(clone);
-                });
-
-                // Reset animation when it ends
-                track.addEventListener('animationend', () => {
-                    track.style.animation = 'none';
-                    track.offsetHeight; // Trigger reflow
-                    track.style.animation = index % 2 === 0 ? 'scrollLeft 30s linear infinite' : 'scrollRight 30s linear infinite';
-                });
-            });
-        });
-
-        // Contact form handling
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const form = e.target;
-            const submitButton = form.querySelector('button[type="submit"]');
-            const formMessage = document.getElementById('formMessage');
-            
-            // Disable submit button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="flex items-center justify-center gap-2"><i class="fas fa-spinner fa-spin"></i> Sending...</span>';
-            
-            try {
-                const response = await fetch('/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: form.name.value,
-                        email: form.email.value,
-                        message: form.message.value
-                    })
-                });
-                
-                const data = await response.json();
-                
-                // Show success/error message
-                formMessage.classList.remove('hidden');
-                if (data.status === 'success') {
-                    formMessage.classList.add('bg-green-100', 'text-green-800', 'dark:bg-green-900/30', 'dark:text-green-300');
-                    formMessage.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Message sent successfully!';
-                    form.reset();
-                } else {
-                    formMessage.classList.add('bg-red-100', 'text-red-800', 'dark:bg-red-900/30', 'dark:text-red-300');
-                    formMessage.innerHTML = '<i class="fas fa-exclamation-circle mr-2"></i> Failed to send message. Please try again.';
-                }
-            } catch (error) {
-                formMessage.classList.remove('hidden');
-                formMessage.classList.add('bg-red-100', 'text-red-800', 'dark:bg-red-900/30', 'dark:text-red-300');
-                formMessage.innerHTML = '<i class="fas fa-exclamation-circle mr-2"></i> An error occurred. Please try again.';
-            } finally {
-                // Re-enable submit button and restore original text
-                submitButton.disabled = false;
-                submitButton.innerHTML = '<span class="flex items-center justify-center gap-2"><i class="fas fa-paper-plane"></i> Send Message</span>';
-            }
-        });
-    </script>
+    <script src="/static/js/main.js"></script>
 </body>
 </html> 
