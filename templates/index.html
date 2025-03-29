@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- Add Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
 </head>
 <body class="bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-dark-text transition-colors duration-300">
     <!-- Navigation -->
@@ -93,7 +93,7 @@
                 <div class="flex-1 flex justify-center" data-aos="fade-left">
                     <div class="image-container">
                         <div class="image-wrapper">
-                            <img src="/static/images/image.jpg" alt="{{ name }}">
+                            <img src="{{ url_for('static', path='images/image.jpg') }}" alt="{{ name }}">
                         </div>
                     </div>
                 </div>
@@ -193,7 +193,7 @@
                                     <div class="absolute inset-0 bg-gradient-to-br from-{{ skill.color }}/10 to-{{ data.color }}-500/10 dark:from-{{ skill.color }}/5 dark:to-{{ data.color }}-500/5 rounded-xl"></div>
                                     <div class="relative w-16 h-16 flex items-center justify-center mb-4">
                                         <object data="{{ skill.icon }}" type="image/svg+xml" class="w-12 h-12 text-{{ skill.color }}">
-                                            <img src="/static/icons/x.svg" alt="{{ skill.name }}" class="w-12 h-12 text-{{ skill.color }}">
+                                            <img src="{{ url_for('static', path='icons/x.svg') }}" alt="{{ skill.name }}" class="w-12 h-12 text-{{ skill.color }}">
                                         </object>
                                     </div>
                                     <h3 class="relative text-lg font-semibold text-gray-800 dark:text-white">{{ skill.name }}</h3>
@@ -204,7 +204,7 @@
                                     <div class="absolute inset-0 bg-gradient-to-br from-{{ skill.color }}/10 to-{{ data.color }}-500/10 dark:from-{{ skill.color }}/5 dark:to-{{ data.color }}-500/5 rounded-xl"></div>
                                     <div class="relative w-16 h-16 flex items-center justify-center mb-4">
                                         <object data="{{ skill.icon }}" type="image/svg+xml" class="w-12 h-12 text-{{ skill.color }}">
-                                            <img src="/static/icons/x.svg" alt="{{ skill.name }}" class="w-12 h-12 text-{{ skill.color }}">
+                                            <img src="{{ url_for('static', path='icons/x.svg') }}" alt="{{ skill.name }}" class="w-12 h-12 text-{{ skill.color }}">
                                         </object>
                                     </div>
                                     <h3 class="relative text-lg font-semibold text-gray-800 dark:text-white">{{ skill.name }}</h3>
@@ -319,6 +319,6 @@
     </section>
     {% endif %}
 
-    <script src="/static/js/main.js"></script>
+    <script src="{{ url_for('static', path='js/main.js') }}"></script>
 </body>
 </html> 

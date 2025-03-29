@@ -1,18 +1,35 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware import Middleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from pathlib import Path
 import json
 import os
+import re
 from typing import Dict, Any
+
+# Custom middleware to redirect HTTP to HTTPS
+class HTTPSRedirectMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        # Check if the request came from HTTP
+        if request.headers.get("x-forwarded-proto") == "http":
+            # Get the full URL and redirect to HTTPS
+            url = request.url
+            https_url = str(url).replace("http://", "https://")
+            return RedirectResponse(https_url)
+        return await call_next(request)
 
 app = FastAPI(
     title="Hussein Ghadhban Portfolio Website",
     description="Personal portfolio website built with FastAPI",
     version="1.0.0"
 )
+
+# Add HTTPS redirect middleware
+app.add_middleware(HTTPSRedirectMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
@@ -44,7 +61,19 @@ def load_json_file(file_path: str) -> Dict[str, Any]:
         print(f"Error: {file_path} contains invalid JSON")
         return {}
 
-skills_data = load_json_file('static/data/skills.json')
+# Process skills data to fix icon paths
+def process_skills_data(skills_data: Dict[str, Any]) -> Dict[str, Any]:
+    for category in skills_data.values():
+        if "skills" in category:
+            for skill in category["skills"]:
+                if "icon" in skill and isinstance(skill["icon"], str):
+                    # Check if the icon path starts with 'static/'
+                    if skill["icon"].startswith("static/"):
+                        # Remove 'static/' prefix since it will be added by url_for
+                        skill["icon"] = skill["icon"].replace("static/", "/static/")
+    return skills_data
+
+skills_data = process_skills_data(load_json_file('static/data/skills.json'))
 achievements_data = load_json_file('static/data/achievements.json')
 config = load_json_file('static/data/config.json')
 
